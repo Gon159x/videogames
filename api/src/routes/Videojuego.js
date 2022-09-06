@@ -52,15 +52,18 @@ router.post('/',async function(req,res){
     try{
     let {nombre,descripcion,lanzamiento,rating,plataformas,generos} = req.body
     if(nombre && descripcion && plataformas){
+        let agregar_bd = []
         const videojuego = await Videojuego.create({nombre:nombre,descripcion:descripcion,lanzamiento:lanzamiento,rating:rating,plataformas:plataformas})
         for (let index = 0; index < generos.length; index++) {
             let element = generos[index].toLowerCase();
-            element = await Genero.findAll({
+            let elemento = await Genero.findOne({
                 where: {
                     nombre: element
                 }
             })
-            videojuego.addGenero(element.id)
+            
+            if(elemento)
+                videojuego.addGenero(elemento.id)
         }
         res.status(201).send(videojuego)
     }else
