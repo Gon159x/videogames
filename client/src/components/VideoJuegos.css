@@ -1,0 +1,10 @@
+.videoJuegos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 5%;
+  }
+
+  .espacio{
+    padding: 1%;
+  }
