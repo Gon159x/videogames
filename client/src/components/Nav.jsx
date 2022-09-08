@@ -1,6 +1,6 @@
 import React from 'react';
 
-//import SearchBar from './SearchBar.jsx'; podria usar un searchbar desde otro componente
+import SearchBar from './SearchBar.jsx'; //podria usar un searchbar desde otro componente
 import './Nav.css';
 import {Link} from 'react-router-dom';  
 
@@ -39,7 +39,7 @@ function Nav() {
             </li>
         
             <li><a href="#">Item 2</a></li>
-            <li><a href="#">Item 3</a></li>
+            <li><a href="#"><SearchBar/></a></li>
         </ul>
     </nav>
 

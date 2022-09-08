@@ -4,8 +4,7 @@ import './VideoJuegos.css';
 import VideoJuego from './VideoJuego.jsx';
 
 export default function VideoJuegos({videoJuegos}) {
-
-    if(videoJuegos)
+    if(videoJuegos.length > 0)
         return (
             <div className='videoJuegos'>
             {videoJuegos.map(v =>
@@ -18,8 +17,8 @@ export default function VideoJuegos({videoJuegos}) {
             </div> )}
             </div>
         );
-    else
+    else{
         return(
-            <div>No hay videojuegos</div>
-        )
+            <div>No hay videojuegos para cargar</div>
+        )}
 }
