@@ -1,11 +1,27 @@
 const initialState = {
     videoGames: [],
+    genres: [],
     videoGamesDetail: {},
-    isLoading: false
+    isLoading: false,
+    ordenando: false
 }
 
 
 function rootReducer(state = initialState, action) {
+    if(action.type === "ORDENAR_STORE"){
+        let ordenados = state.videoGames
+        if(action.payload.type === "name")
+            ordenados.sort(function(a,b){return a[action.payload.type]>b[action.payload.type] ? 1 : -1})
+        if(action.payload.type === "rating")
+            ordenados.sort((a,b) => b[action.payload.type]-a[action.payload.type])
+        if(action.payload.orden === "des")
+            ordenados.reverse()
+        return {
+            ...state,
+            videoGames:ordenados,
+            ordenando: !state.ordenando
+        }}
+
     if(action.type === "LOADING"){
         return {
             ...state,
@@ -22,14 +38,13 @@ function rootReducer(state = initialState, action) {
     if (action.type === "GET_VIDEOGAMES_BYNAME") {
 
         return {
-          videoGames: action.payload.results,
+          videoGames: action.payload,
           isLoading:false
         };
     }
     if(action.type === "GET_VIDEOGAMES"){
-
         return {
-            videoGames: action.payload.results,
+            videoGames: action.payload,
             isLoading:false
           }
     }

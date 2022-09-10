@@ -5,42 +5,50 @@ import Nav from './components/Nav';
 import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import {getVideoGames} from "./actions";
+import loadingImage from "./55a4629ffc77f363e3ec1534b8a422-unscreen.gif";
+import PagVideoJuego from './components/PagVideoJuego';
 
-function App({videoGames,getVideoGames,isLoading}) {
+function App({ordenando,videoGames,getVideoGames,isLoading}) {
   const path = useLocation().pathname;
   const location = path.split("/")[1];
-  const [videoJuegos, setvideoJuegos] = useState([]);//Sumandole redux, solo necesitaria esto para mostrar los videojuegos
-  const [pagina,setPagina] = useState(1)//Quizas con redux solo necesite este campo.
-  //usar use efect con la creacion de app para inicializar las cosas
-  //const [visualizando,setVisualizando] = useState([])
-  //En la creacion de la app primero setear en la base de datos todos los generos y ademas guardar en el estado
-  //de app los 100 videojuegos de la api, ademas tener un estado que son los videojuegos que 
-  //se muestran actualmente(15 por pagina)
+  const [videoJuegos, setvideoJuegos] = useState([]);
+  const [pagina,setPagina] = useState(1)
+
+  const reiniciar = function(){
+    setPagina(1)
+    getVideoGames()
+  }
+
   useEffect(() =>{
     getVideoGames()
   },[])
 
   useEffect(() => {
     const videoJuegosNuevos = []
-    videoGames.map(elemento => {
-      
-      const generos = []
-      for (let index = 0; index < elemento.genres.length; index++) {
-        generos.push(elemento.genres[index].name)
+    let key = 0
+    let limite_superior = pagina*15 > videoGames.length ? videoGames.length : pagina*15
+
+    if(videoGames.length)
+      for (let index = (pagina-1)*15; index < limite_superior; index++) {
+        const elemento = videoGames[index];
+        const generos = []
+        if(elemento.genres)
+          for (let index = 0; index < elemento.genres.length; index++) {
+            generos.push(elemento.genres[index].name)
+          }
+        const elementoNuevo = {key: elemento.id,titulo:elemento.name,generos:generos,img:elemento.background_image}
+        videoJuegosNuevos.push(elementoNuevo)
+        
       }
-      const elementoNuevo = {titulo:elemento.name,generos:generos,img:elemento.background_image}
-
-      videoJuegosNuevos.push(elementoNuevo)
-    })
+    
     setvideoJuegos(videoJuegosNuevos)
-    console.log(videoJuegos)
-  },[videoGames,isLoading])
+  },[videoGames,isLoading,ordenando,pagina])
 
 
 
 
 
-  //const videoJuegos = [{titulo:"Kingdom Come deliverance",generos:["Drama","Accion"],img : "https://cdn1.epicgames.com/ca4058f18b0a4a9e9e2ccc28f7f33000/offer/EGS_WarhorseStudios_KingdomComeDeliverance_S3-1360x766-1e8502930c6282cb34acf7add01c6832a5bc217e.jpg"}]
+  const kingdom = [{titulo:"Kingdom Come deliverance",generos:["Drama","Accion"],img : "https://cdn1.epicgames.com/ca4058f18b0a4a9e9e2ccc28f7f33000/offer/EGS_WarhorseStudios_KingdomComeDeliverance_S3-1360x766-1e8502930c6282cb34acf7add01c6832a5bc217e.jpg"}]
   
   //videoJuegos.push(guiltyGear)
   //videoJuegos.push(guiltyGear)
@@ -49,27 +57,48 @@ function App({videoGames,getVideoGames,isLoading}) {
   //videoJuegos.push(guiltyGear)
   //Deberia controlar que solo le envie 15, le envio los primeros 15, cuando se hace click en siguiente, le envio otros 15 y asi
   return (
-    <div className={"App " + location}>
+    <div className="home">
       {/* <VideoJuego></VideoJuego> */}
       <Switch>
         <Route
           exact path = "/landing"
-          > 
+          >  
+            <div className = "landing">
             <Link style={{textDecoration: 'none'}} to = "/home">
               <button className="boton-landing">Entrar a la pagina</button>
             </Link>
+            </div>
+
             
           </Route>
           <Route
-            path = "/home"
+            exact path = "/home"
           >
-            <Nav/>
+            <Nav reiniciar= {reiniciar}/>
+
             {/* <button onClick={getVideoGames()}>boton...</button> */}
-            {isLoading ? <div>esperando...</div>: <VideoJuegos videoJuegos={videoJuegos}/>}
-            
+            {isLoading ? <div className='cargando'><img src={loadingImage}/></div>:<>
+            <VideoJuegos videoJuegos={videoJuegos}/>
+            <div className='paginado'>
+              <button onClick={() => { 
+                if(pagina > 1)
+                setPagina(pagina-1)
+                }} className="boton-pag">&#8249;</button>
+                <h1 className='indicador-pagina'>{pagina}</h1>
+              <button onClick={() => {
+                console.log(pagina)
+                if(pagina*15-1 < videoGames.length-1)
+                  setPagina(pagina+1)
+                }}className="boton-pag">&#8250;</button>
+            </div>
+            </>}
+          </Route>
+          <Route
+            path="/home/videogame/:id"
+          >
+            <PagVideoJuego titulo="kingdom"/>
           </Route>
       </Switch>
-      
     </div>
   );
 }
@@ -77,7 +106,8 @@ function App({videoGames,getVideoGames,isLoading}) {
 function mapStateToProps(state) {
   return {
     videoGames: state.videoGames,
-    isLoading: state.isLoading
+    isLoading: state.isLoading,
+    ordenando: state.ordenando
   };
 }//Creo que esto no hace falta
 

@@ -8,8 +8,9 @@ export default function VideoJuegos({videoJuegos}) {
         return (
             <div className='videoJuegos'>
             {videoJuegos.map(v =>
-            <div className='espacio'>
+            <div className='espacio' key = {v.key}>
                 <VideoJuego
+                id = {v.key}
                 titulo={v.titulo}
                 generos={v.generos}
                 img={v.img}

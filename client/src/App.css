@@ -1,12 +1,27 @@
-.App.home{
+body{
+  overflow-x:hidden
+}
+
+.home{
   text-align: center;
-  background-color: rgb(255, 255, 255);
-  height: 100vh; /* For 100% screen height */
-  width:  100vw; /* For 100% screen width */
+  background-color: rgb(32, 32, 32);
+  /*height: 100vh; /* For 100% screen height */
+  /*width:  100vw; /* For 100% screen width */
+  height: 100%;
+  width: 100%;
 }
 
 
-.App.landing {
+.cargando{
+  height: 100vh; /* For 100% screen height */
+  width:  100vw; /* For 100% screen width */
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  color: #ddd;
+}
+
+.landing {
   text-align: center;
   background-image: url('./posible_landing2_auto_x2.jpg');
   height: 100vh; /* For 100% screen height */
@@ -21,6 +36,35 @@
 }
 
 
+.paginado{
+
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.indicador-pagina{
+  color:rgb(255, 255, 255);
+}
+
+.boton-pag{
+  height: 8vh;
+  width: 8%;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+
+.boton-pag:hover{
+  background-color: #f1f1f1;
+  color: black;
+}
+
+
+
+.round:hover{
+  background-color: #ddd;
+  color: black;
+}
 
 
 /* CSS */

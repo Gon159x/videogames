@@ -20,7 +20,7 @@ function SearchBar({videoGames,getVideoGame}) {
       //onSearch(videoJuego);
     }}>
       <input type="search" placeholder="Buscar Videojuego" onChange={cambia}/>
-      <button type="submit">Buscar</button>
+      {/* <button type="submit">Buscar</button> */}
     </form>
     
   );

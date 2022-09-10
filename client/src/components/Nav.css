@@ -1,4 +1,4 @@
-nav {
+/* nav {
     display: flex; 
     justify-content: space-between; 
     padding: 0%; 
@@ -12,10 +12,117 @@ nav {
   }
   
   nav li {
-    padding-left: 1rem; 
+    padding-left: 10rem; 
   }
 
   nav a {
     text-decoration: none;
     color: #ffffff;
-  }
+  } */
+
+  /* CSS Document */
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Bree+Serif);
+
+body {
+	background: rgb(32, 32, 32);
+	font-size:16px;
+	line-height: 20px;
+	color: #242424;
+	word-wrap:break-word !important;
+	font-family: 'Open Sans', sans-serif;
+	}
+
+
+
+
+
+nav {
+	margin: 30px auto;
+	background-color:  #3b3b3b;
+  /* box-shadow: 0px 3px 20px 3px #162433; */
+}
+
+nav ul {
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
+    position: relative;
+    text-align: center;
+}
+	
+nav ul li {
+	display:inline-block;
+	background-color: #3b3b3b;
+	}
+
+nav a {
+	display:block;
+	padding:0 20px;	
+	color:#FFF;
+	font-size:16px;
+	line-height: 60px;
+	text-decoration:none;
+}
+
+nav a:hover { 
+	background-color: #000000; 
+}
+
+/* Hide Dropdowns by Default */
+nav ul ul {
+	display: none;
+	position: absolute; 
+	top: 60px; /* the height of the main nav */
+}
+	
+/* Display Dropdowns on Hover */
+nav ul li:hover > ul {
+	display:inherit;
+}
+	
+/* Fisrt Tier Dropdown */
+nav ul ul li {
+	width:170px;
+	float:none;
+	display:list-item;
+	position: relative;
+}
+
+/* Second, Third and more Tiers	*/
+nav ul ul ul li {
+	position: relative;
+	top:-60px; 
+	left:170px;
+}
+
+	
+i {
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 4px;
+    margin: -7px 0 0px 7px;
+    vertical-align: middle;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
