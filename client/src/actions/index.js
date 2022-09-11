@@ -13,6 +13,18 @@ export function getVideoGameDetail(payload) {
   //           });
   //       };
   // }
+// export function buscarVideoJuego(payload){
+//   return{type: "BUSCAR", payload}
+// }
+
+export function buscarVideoJuego(id){
+  return function(dispatch){
+    dispatch({ type: 'LOADING' });
+    return fetch(`https://api.rawg.io/api/games/${id}?key=f79ce3822058497090acd470ecd98a01`)
+    .then(data => data.json())
+    .then(json => dispatch({type:"BUSCAR",payload:json}))
+  }
+}
 
   export function getVideoGame(titulo){
     return async function(dispatch){

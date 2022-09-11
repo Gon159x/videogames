@@ -15,12 +15,20 @@
     height: 20vh; */
     width: 100%;
     height: 50%;
+    border-radius: 5%;
 }
 
 .generos{
     display: flex;
+    width: auto;
+    height: auto;
+    justify-content: center;
+    padding-left: 9%;
+    padding-right: 9%;
 }
 .texto-generos{
+    width: auto;
+    height: auto;
     padding-right: 15%;
     padding-left: 5%;
 }

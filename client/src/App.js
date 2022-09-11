@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import {getVideoGames} from "./actions";
 import loadingImage from "./55a4629ffc77f363e3ec1534b8a422-unscreen.gif";
 import PagVideoJuego from './components/PagVideoJuego';
+import FormVideoJuego from './components/FormVideoJuego';
 
 function App({ordenando,videoGames,getVideoGames,isLoading}) {
   const path = useLocation().pathname;
@@ -96,7 +97,15 @@ function App({ordenando,videoGames,getVideoGames,isLoading}) {
           <Route
             path="/home/videogame/:id"
           >
-            <PagVideoJuego titulo="kingdom"/>
+            <Nav reiniciar= {reiniciar}/>
+            {/* hacer otro nav sin los filtros */}
+            <PagVideoJuego reiniciar = {reiniciar} titulo="kingdom"/>
+          </Route>
+          <Route
+            path = "/crearvideojuego"
+          >
+            <Nav reiniciar= {reiniciar}/>
+            <FormVideoJuego/>
           </Route>
       </Switch>
     </div>

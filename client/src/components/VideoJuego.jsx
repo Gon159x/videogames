@@ -13,8 +13,7 @@ export default function VideoJuego({id,titulo,generos,img}) {
                 <img className='imagen' src={img} alt = 'la imagen no se pudo cargar'/>
                 <h3>{titulo}</h3>
                 <div className='generos'>
-                    <p className='texto-generos'>Generos:</p> {generos.map(c => <p>{c}&nbsp;&nbsp;</p>)}
-                    <p></p>
+                    {generos.map(c => <p>{c}&nbsp;&nbsp;</p>)}
                 </div>
             </div>
 

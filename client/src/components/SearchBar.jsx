@@ -29,7 +29,7 @@ function SearchBar({videoGames,getVideoGame}) {
 
 function mapStateToProps(state) {
   return {
-    videoGames: state.videoGames
+    videoGames: state.videoGamesDetail
   };
 }//Creo que esto no hace falta
 

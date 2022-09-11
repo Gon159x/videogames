@@ -73,7 +73,7 @@ function Nav({ordenar,reiniciar}) {
                 </ul>
            </li>
            <li>
-           <a href="#">Agregar videojuego</a>
+           <a href="/crearvideojuego">Agregar videojuego</a>
            </li>
         </ul>
     </nav>

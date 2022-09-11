@@ -8,6 +8,25 @@ const initialState = {
 
 
 function rootReducer(state = initialState, action) {
+    // if(action.type === "BUSCAR"){
+    //     const id = Number(action.payload)
+    //     for (let index = 0; index < state.videoGames.length; index++) {
+    //         const element = state.videoGames[index];
+    //         if(element.id === id){
+    //             console.log(element)
+    //         return{
+    //             ...state,
+    //             videoGamesDetail: element
+    //         }}
+    //     }
+    // }
+    if(action.type === "BUSCAR"){
+        console.log(action.payload)
+        return{
+            ...state,
+            videoGamesDetail:action.payload
+        }
+    }
     if(action.type === "ORDENAR_STORE"){
         let ordenados = state.videoGames
         if(action.payload.type === "name")
