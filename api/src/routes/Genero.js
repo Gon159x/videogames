@@ -5,13 +5,14 @@ const router = Router();
 
 router.post('/',async function(req,res){
     try{
-    let {nombre} = req.body
+    let {id,nombre} = req.body
     if(nombre){
-        const genero = await Genero.create({nombre:nombre})
+        const genero = await Genero.create({id:id,nombre:nombre})
         res.status(201).send(genero)
     }else
         res.status(404).send('Falta enviar datos obligatorios')
     }catch(error){
+        res.send("Error")
         console.log(error)
     }
 

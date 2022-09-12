@@ -10,7 +10,7 @@ function VideoJuego({videoGame,buscarVideoJuego,reiniciar}) {
     //let generos = ["drama","accion"]
     //Agregar un if mas si se manda descripcion, fecha de lanzamiento y rating, o bien deberia agregar una pregunta de si 
     //es una consulta completa o parcial
-   
+    
     const [id, setId] = useState(useParams().id);
 
     useEffect(() =>{
@@ -26,13 +26,20 @@ function VideoJuego({videoGame,buscarVideoJuego,reiniciar}) {
         return arreglo
     }
 
-    if(videoGame){
-        let plataformas = videoGame.parent_platforms.map(elemento => elemento.platform.name)
-        plataformas = plataformas.map(elemento => elemento + ", ")
-        plataformas = eliminarComa(plataformas)
-        let generos = videoGame.genres.map(elemento => elemento.name)
-        generos = generos.map(elemento => elemento + ", ")
-        generos = eliminarComa(generos)
+
+    if(JSON.stringify(videoGame) !== JSON.stringify({})){
+        let plataformas = ""
+        let generos = ""
+        if(videoGame.parent_platforms){
+            plataformas = videoGame.parent_platforms.map(elemento => elemento.platform.name)
+            plataformas = plataformas.map(elemento => elemento + ", ")
+            plataformas = eliminarComa(plataformas)
+        }
+        if(videoGame.genres){
+            generos = videoGame.genres.map(elemento => elemento.name)
+            generos = generos.map(elemento => elemento + ", ")
+            generos = eliminarComa(generos)
+        }
         
         return (
             <body className='body-especial'>

@@ -4,6 +4,7 @@ import './VideoJuegos.css';
 import VideoJuego from './VideoJuego.jsx';
 
 export default function VideoJuegos({videoJuegos}) {
+    console.log(videoJuegos)
     if(videoJuegos.length > 0)
         return (
             <div className='videoJuegos'>
@@ -11,6 +12,7 @@ export default function VideoJuegos({videoJuegos}) {
             <div className='espacio' key = {v.key}>
                 <VideoJuego
                 id = {v.key}
+                bd = {v.baseDatos}
                 titulo={v.titulo}
                 generos={v.generos}
                 img={v.img}

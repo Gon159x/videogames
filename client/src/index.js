@@ -7,6 +7,42 @@ import { BrowserRouter } from 'react-router-dom';
 import store from "./store/index.js";
 import { Provider } from "react-redux";
 
+
+
+// async function postearGenero(data){
+//   const respuesta = await fetch("http://localhost:3001/genres",{
+//   method:'POST',
+//   headers: {
+//     'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify(data)
+//   })
+// }
+
+// fetch("https://api.rawg.io/api/genres?key=f79ce3822058497090acd470ecd98a01")
+// .then(data => data.json())
+// .then(data => data.results.map(elemento => elemento))
+// .then(data => data.forEach(elemento => {
+//   postearGenero({id:elemento.id,nombre:elemento.name})
+//   }
+// ))
+
+// const data = {
+//   nombre:"dwa",
+//   descripcion:"dw",
+//   generos:["racing"],
+//   plataformas: "Playstation"
+// }
+
+// fetch("http://localhost:3001/videogames",{
+//   method:'POST',
+//   headers: {
+//     'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify(data)
+//   })
+//   .then(data => console.log(data.json()))
+
 ReactDOM.render(
   
   <React.StrictMode>

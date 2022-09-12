@@ -4,6 +4,10 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Genero', {
+    id:{
+      type:DataTypes.INTEGER,
+      primaryKey: true
+    },
     nombre: {
         type:DataTypes.STRING,
         set(valor){

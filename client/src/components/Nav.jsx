@@ -1,57 +1,28 @@
 import React from 'react';
-
-import SearchBar from './SearchBar.jsx'; //podria usar un searchbar desde otro componente
+import SearchBar from './SearchBar.jsx'; 
 import './Nav.css';
 import {Link} from 'react-router-dom';  
 import { connect } from 'react-redux';
-import { ordenar } from '../actions/index.js';
+import { ordenar,filtrarGenero,filtrarBD } from '../actions/index.js';
+import {useEffect} from 'react';
+import logo from "./favicon.ico"
 
-function Nav({ordenar,reiniciar}) {
+function Nav({filtrarBD,ordenar,reiniciar,generos,filtrarGenero}) {
+    useEffect(() =>{
+    },[generos])
+
     return (
-    //   <nav>
-    //     <Link to ='/home'>
-    //       <span>
-    //         {/* <img id="logoHenry" src={Logo} width="30" height="30" className="d-inline-block align-top" alt="" /> */}
-    //         Henry - VideoGames
-    //       </span>
-    //     </Link>
-    //     <Link  to = '/landing'>
-    //       <span>
-    //         Landing Page
-    //       </span>
-    //     </Link>
-        
-    //       {/* <SearchBar
-    //           onSearch={onSearch}
-    //         /> */}
-        
-          
-    //   </nav>
-    // <nav>
-    //     <Link to = "/home">
-    //         <h2>Henry - VideoGames</h2>
-    //     </Link>
-        
-    //     <ul>
-    //         <li><a href="#"><SearchBar/></a></li>
-    //         <li>
-    //             <Link to ='/home'>Home</Link>
-    //         </li>
-    //         <li>
-    //             <Link to ='/landing'>LandingPage</Link>
-    //         </li>
-        
-    //         <li><a href="#">Item 2</a></li>
-            
-    //     </ul>
-    // </nav>
 
 <div id="container">
     <nav>
         <ul>
-            <li onClick={() => reiniciar()}><a href="/home">Henry -VideoGames</a></li>
+            <li><a></a></li>
+            <li onClick={() => reiniciar()}><Link to="/home"><img style={{flex:1,flexWrap:'wrap'}} src={logo} className="logo-henry"/>Henry -VideoGames</Link></li>
+            
+
+      
             {/* cambiar a href por LINK */}
-            <li><a href="#"><SearchBar/></a></li>
+            <li><SearchBar/></li>
             <li><a href="#">Ordenar<i className="down"></i></a>
                 <ul>
                     <li onClick={() => ordenar({type:"name",orden:"asc"})}><a href="#">ABC ↑</a></li>
@@ -62,18 +33,18 @@ function Nav({ordenar,reiniciar}) {
             </li>
            <li><a href="#">Generos<i className="down"></i></a>
                 <ul>
-                    <li><a href="#">Deberia guardar en store todos los generos...</a></li>
+                {generos ? generos.map(elemento => <li onClick={() => filtrarGenero(elemento.nombre)}><a href="#">{elemento.nombre}</a></li>) : <li><a href="#">No cargo los generos e</a></li>}
                 </ul>
            </li>
            <li><a href="#">Base de datos<i className="down"></i></a>
                 <ul>
-                    <li><a href="#">RAWG</a></li>
-                    <li><a href="#">Creados</a></li>
-                    <li><a href="#">Todos</a></li>
+                    <li onClick={() => filtrarBD("RAWG")} ><a href="#">RAWG</a></li>
+                    <li onClick={() => filtrarBD("BD")}><a href="#">Creados</a></li>
+                    <li onClick={() => filtrarBD("ALL")}><a href="#">Todos</a></li>
                 </ul>
            </li>
            <li>
-           <a href="/crearvideojuego">Agregar videojuego</a>
+            <Link to ="/crearvideojuego">Agregar videojuego</Link>
            </li>
         </ul>
     </nav>
@@ -87,13 +58,15 @@ function Nav({ordenar,reiniciar}) {
   
   function mapStateToProps(state) {
     return {
-      videoGames: state.videoGames
+      generos: state.generos
     };
   }//Creo que esto no hace falta
   
   function mapDispatchToProps(dispatch) {
     return {
-      ordenar: tipo => dispatch(ordenar(tipo))
+      ordenar: tipo => dispatch(ordenar(tipo)),
+      filtrarGenero: genero => dispatch(filtrarGenero(genero)),
+      filtrarBD: tipo => dispatch(filtrarBD(tipo))
     };
   }
   

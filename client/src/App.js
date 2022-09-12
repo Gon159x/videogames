@@ -4,27 +4,56 @@ import VideoJuegos from './components/VideoJuegos';
 import Nav from './components/Nav';
 import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
-import {getVideoGames} from "./actions";
+import {getGeneros, getVideoGames} from "./actions";
 import loadingImage from "./55a4629ffc77f363e3ec1534b8a422-unscreen.gif";
 import PagVideoJuego from './components/PagVideoJuego';
 import FormVideoJuego from './components/FormVideoJuego';
 
-function App({ordenando,videoGames,getVideoGames,isLoading}) {
+
+
+function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) {
   const path = useLocation().pathname;
   const location = path.split("/")[1];
   const [videoJuegos, setvideoJuegos] = useState([]);
   const [pagina,setPagina] = useState(1)
 
+  async function postearGenero(data){
+  const respuesta = await fetch("http://localhost:3001/genres",{
+  method:'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+  })
+  }
+
+
   const reiniciar = function(){
     setPagina(1)
-    getVideoGames()
+    //getVideoGames()
   }
 
   useEffect(() =>{
+
+    console.log(generos.length)
+    if(generos.length === 0){
+      console.log("Entre al fetch")
+      fetch("https://api.rawg.io/api/genres?key=f79ce3822058497090acd470ecd98a01")
+      .then(data => data.json())
+      .then(data => data.results.map(elemento => elemento))
+      .then(data => data.forEach(elemento => {
+        postearGenero({id:elemento.id,nombre:elemento.name})
+        }
+      ))}
+
+    
+
     getVideoGames()
+    getGeneros()
   },[])
 
   useEffect(() => {
+    console.log(videoGames)
     const videoJuegosNuevos = []
     let key = 0
     let limite_superior = pagina*15 > videoGames.length ? videoGames.length : pagina*15
@@ -37,13 +66,13 @@ function App({ordenando,videoGames,getVideoGames,isLoading}) {
           for (let index = 0; index < elemento.genres.length; index++) {
             generos.push(elemento.genres[index].name)
           }
-        const elementoNuevo = {key: elemento.id,titulo:elemento.name,generos:generos,img:elemento.background_image}
+        const elementoNuevo = {baseDatos:elemento.baseDatos,key: elemento.id,titulo:elemento.name,generos:generos,img:elemento.background_image}
         videoJuegosNuevos.push(elementoNuevo)
         
       }
     
     setvideoJuegos(videoJuegosNuevos)
-  },[videoGames,isLoading,ordenando,pagina])
+  },[videoGames,generos,isLoading,ordenando,pagina])
 
 
 
@@ -87,7 +116,6 @@ function App({ordenando,videoGames,getVideoGames,isLoading}) {
                 }} className="boton-pag">&#8249;</button>
                 <h1 className='indicador-pagina'>{pagina}</h1>
               <button onClick={() => {
-                console.log(pagina)
                 if(pagina*15-1 < videoGames.length-1)
                   setPagina(pagina+1)
                 }}className="boton-pag">&#8250;</button>
@@ -107,6 +135,12 @@ function App({ordenando,videoGames,getVideoGames,isLoading}) {
             <Nav reiniciar= {reiniciar}/>
             <FormVideoJuego/>
           </Route>
+          <Nav reiniciar={reiniciar}/>
+          <Route
+            path = "/agregado"
+          >
+            <h1>Juego agregado</h1>
+          </Route>
       </Switch>
     </div>
   );
@@ -114,15 +148,17 @@ function App({ordenando,videoGames,getVideoGames,isLoading}) {
 
 function mapStateToProps(state) {
   return {
-    videoGames: state.videoGames,
+    videoGames: state.filtrados,
     isLoading: state.isLoading,
-    ordenando: state.ordenando
+    ordenando: state.ordenando,
+    generos: state.generos
   };
 }//Creo que esto no hace falta
 
 function mapDispatchToProps(dispatch) {
   return {
-    getVideoGames: () => dispatch(getVideoGames())
+    getVideoGames: () => dispatch(getVideoGames()),
+    getGeneros: () => dispatch(getGeneros())
   };
 }
 

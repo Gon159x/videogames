@@ -5,9 +5,11 @@ const router = Router();
 
 router.get('/',async function(req,res){
     try{
+        
         let name = req.query.name
+        console.log("Entre al get papi",name)
         let videoJuegos = await Videojuego.findAll()
-        if(name){
+        if(name !== undefined){
             let temporal = []
             for (let index = 0; index < videoJuegos.length; index++) {
                 const element = videoJuegos[index];
@@ -18,9 +20,11 @@ router.get('/',async function(req,res){
             }
             videoJuegos = temporal
         }
+        console.log("Sali del get papi",name)
+        console.log(videoJuegos)
         if(videoJuegos.length === 0){
             res.status(200)
-            .send('No se encontraron videojuegos con ese nombre')
+            .send([])
         }
         else{
             res.status(200)
@@ -53,6 +57,7 @@ router.post('/',async function(req,res){
     // fetch(`https://api.rawg.io/api/games?key=f79ce3822058497090acd470ecd98a01`)
     // .then(r => r.json())
     // .then(r => console.log(r)) no me deja hacer fetch en el back :(
+        console.log("Entre en el post papa")
     let {nombre,descripcion,lanzamiento,rating,plataformas,generos} = req.body
     if(nombre && descripcion && plataformas){
         let agregar_bd = []
@@ -74,6 +79,8 @@ router.post('/',async function(req,res){
         res.status(404).send('Falta enviar datos obligatorios')
     }catch(error){
         console.log(error)
+        console.log(nombre,descripcion,plataformas,generos,rating,lanzamiento)
+        res.send("Error")
     }
 
 })

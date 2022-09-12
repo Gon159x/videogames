@@ -8,6 +8,11 @@ module.exports = (sequelize) => {
       primaryKey: true,
       type: DataTypes.INTEGER,
       autoIncrement: true,
+      
+    },
+    baseDatos:{
+      type:DataTypes.BOOLEAN,
+      defaultValue:true
     },
     nombre: {
       type: DataTypes.STRING,

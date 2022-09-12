@@ -1,0 +1,11 @@
+.buscador{
+    width: 22vw;
+    height: 5vh;
+    border-radius: 100px;
+    background-color: rgb(83, 83, 83);
+    color: aliceblue;
+    padding-left: 7%;
+    font-size:medium;
+    font-weight: bolder;
+}
+

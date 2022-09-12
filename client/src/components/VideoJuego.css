@@ -8,6 +8,7 @@
     background-color: #333;
     border-radius: 15px;
     color: aliceblue;
+    box-shadow: 6px 5px 5px black;
 }
 
 .imagen{
@@ -20,6 +21,9 @@
 
 .generos{
     display: flex;
+    flex:1;
+    flex-wrap: wrap;
+    flex-direction: row;
     width: auto;
     height: auto;
     justify-content: center;

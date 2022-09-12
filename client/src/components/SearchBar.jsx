@@ -19,8 +19,11 @@ function SearchBar({videoGames,getVideoGame}) {
       
       //onSearch(videoJuego);
     }}>
-      <input type="search" placeholder="Buscar Videojuego" onChange={cambia}/>
+      <div>
+      <input className="buscador" type="search" placeholder="   Buscar Videojuego...." onChange={cambia}/>
       {/* <button type="submit">Buscar</button> */}
+      </div>
+      
     </form>
     
   );
@@ -29,7 +32,7 @@ function SearchBar({videoGames,getVideoGame}) {
 
 function mapStateToProps(state) {
   return {
-    videoGames: state.videoGamesDetail
+    videoGames: state.videoGames
   };
 }//Creo que esto no hace falta
 

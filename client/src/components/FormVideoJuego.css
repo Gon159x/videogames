@@ -21,6 +21,24 @@
     padding: 3%;
 }
 
+.link{
+    text-decoration: none;
+    color: red;
+}
+
+.danger{
+    color: red;
+}
+
+.item-generos{
+    display: flex;
+    flex:1;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+
+
 .item-descripcion{
     display: flex;
     justify-content: flex-start;

@@ -1,27 +1,53 @@
 const initialState = {
     videoGames: [],
-    genres: [],
+    generos: [],
     videoGamesDetail: {},
     isLoading: false,
-    ordenando: false
+    ordenando: false,
+    filtrados: []//Implementar esto para no tener q buscar siempre en videoGames
 }
 
 
 function rootReducer(state = initialState, action) {
-    // if(action.type === "BUSCAR"){
-    //     const id = Number(action.payload)
-    //     for (let index = 0; index < state.videoGames.length; index++) {
-    //         const element = state.videoGames[index];
-    //         if(element.id === id){
-    //             console.log(element)
-    //         return{
-    //             ...state,
-    //             videoGamesDetail: element
-    //         }}
-    //     }
-    // }
+    if(action.type === "FILTRAR_BD"){
+        const elementos = []
+        if(action.payload === "BD"){
+            state.videoGames.forEach(e => {if(e.baseDatos)elementos.push(e)})
+        }else if(action.payload === "RAWG"){
+            state.videoGames.forEach(e => {if(!e.baseDatos)elementos.push(e)})
+        }else{
+            state.videoGames.forEach(e => elementos.push(e))
+        }
+        return{
+            ...state,
+            filtrados:elementos
+        }
+
+    }
+    if(action.type === "FILTRAR_GENERO"){
+        const videoGamesNuevo = []
+        for (let index = 0; index < state.videoGames.length; index++) {
+            const element = state.videoGames[index];
+            element.genres.forEach(elemento => {
+                if(action.payload.toLowerCase() === elemento.name.toLowerCase()){
+                    console.log(element)
+                    videoGamesNuevo.push(element)
+                }
+                    
+            });
+        }
+        return{
+            ...state,
+            filtrados: videoGamesNuevo
+        }
+    }
+    if(action.type === "AGREGAR_GENEROS"){
+        return {
+            ...state,
+            generos:action.payload,
+        }
+    }
     if(action.type === "BUSCAR"){
-        console.log(action.payload)
         return{
             ...state,
             videoGamesDetail:action.payload
@@ -37,14 +63,14 @@ function rootReducer(state = initialState, action) {
             ordenados.reverse()
         return {
             ...state,
-            videoGames:ordenados,
+            filtrados:ordenados,
             ordenando: !state.ordenando
         }}
 
     if(action.type === "LOADING"){
         return {
             ...state,
-            isLoading: true
+            isLoading: !state.isLoading
         }
     }
     if (action.type === "GET_VIDEOGAME_DETAIL") {
@@ -57,14 +83,18 @@ function rootReducer(state = initialState, action) {
     if (action.type === "GET_VIDEOGAMES_BYNAME") {
 
         return {
-          videoGames: action.payload,
-          isLoading:false
+            ...state,
+            videoGames: action.payload,
+            isLoading:false,
+            filtrados:action.payload
         };
     }
     if(action.type === "GET_VIDEOGAMES"){
         return {
+            ...state,
             videoGames: action.payload,
-            isLoading:false
+            isLoading:false,
+            filtrados: action.payload
           }
     }
     return state;
