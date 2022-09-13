@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import store from "./store/index.js";
 import { Provider } from "react-redux";
 
-const baseURL= "https://videogames-bd.herokuapp.com/"
+const baseURL= "https://videogames-bd.herokuapp.com"
 //const baseURL = "http://localhost:3001"
 export {baseURL};
 // async function postearGenero(data){
