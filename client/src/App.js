@@ -9,6 +9,7 @@ import loadingImage from "./55a4629ffc77f363e3ec1534b8a422-unscreen.gif";
 import PagVideoJuego from './components/PagVideoJuego';
 import FormVideoJuego from './components/FormVideoJuego';
 import Loader from './components/Loader';
+import {baseURL} from './index.js'
 
 
 function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) {
@@ -18,7 +19,7 @@ function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) 
   const [pagina,setPagina] = useState(1)
 
   async function postearGenero(data){
-  const respuesta = await fetch("http://localhost:3001/genres",{
+  const respuesta = await fetch(baseURL+"/genres",{
   method:'POST',
   headers: {
     'Content-Type': 'application/json'

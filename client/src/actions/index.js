@@ -1,3 +1,5 @@
+import { baseURL } from "..";
+
 export function getVideoGameDetail(payload) {
     return { type: "GET_VIDEOGAME_DETAIL", payload };
   }
@@ -22,7 +24,7 @@ export function buscarVideoJuego(id){
         dispatch({type:"BUSCAR",payload:json})})
     else {
       const nuevoId = id.slice(2,id.length)
-      return fetch('http://localhost:3001/videogames/'+nuevoId)
+      return fetch(baseURL+'/videogames/'+nuevoId)
       .then(data => data.json())
       .then(json => {
         if(json[0].Generos)
@@ -42,7 +44,7 @@ export function buscarVideoJuego(id){
 }
   export function getGeneros(){
     return function(dispatch){
-      return fetch("http://localhost:3001/genres")
+      return fetch(baseURL+"/genres")
       .then(data =>  data.json())
       .then(data => dispatch({type:"AGREGAR_GENEROS",payload:data}))
     }
@@ -61,7 +63,7 @@ export function buscarVideoJuego(id){
             const promesa = await fetch("https://api.rawg.io/api/games?key=f79ce3822058497090acd470ecd98a01&page="+(index+1)+"&search="+titulo)
             resultados.push(promesa)
         }
-        const promesa2 = await fetch("http://localhost:3001/videogames?name="+titulo)
+        const promesa2 = await fetch(baseURL+"/videogames?name="+titulo)
         resultados.push(promesa2)
         return Promise.all(resultados)
         .then(async respuestas => {
@@ -101,7 +103,7 @@ export function buscarVideoJuego(id){
             const promesa = await fetch("https://api.rawg.io/api/games?key=f79ce3822058497090acd470ecd98a01&page="+(index+1))
             resultados.push(promesa)
         }
-         const promesa2 = await fetch("http://localhost:3001/videogames")
+         const promesa2 = await fetch(baseURL+"/videogames")
          resultados.push(promesa2)
         return Promise.all(resultados)
         .then(async respuestas => {
