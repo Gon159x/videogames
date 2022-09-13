@@ -4,7 +4,6 @@ import './VideoJuegos.css';
 import VideoJuego from './VideoJuego.jsx';
 
 export default function VideoJuegos({videoJuegos}) {
-    console.log(videoJuegos)
     if(videoJuegos.length > 0)
         return (
             <div className='videoJuegos'>

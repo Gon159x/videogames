@@ -36,6 +36,16 @@
     align-items: center;
 }
 
+.cargando{
+    width: 100vw;
+    height: 100vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color: #ddd;
+  }
+  
+
 .contenedor{
     height: auto; /* For 100% screen height */
     width:  100vw; /* For 100% screen width */

@@ -30,7 +30,6 @@ function rootReducer(state = initialState, action) {
             const element = state.videoGames[index];
             element.genres.forEach(elemento => {
                 if(action.payload.toLowerCase() === elemento.name.toLowerCase()){
-                    console.log(element)
                     videoGamesNuevo.push(element)
                 }
                     
@@ -50,6 +49,7 @@ function rootReducer(state = initialState, action) {
     if(action.type === "BUSCAR"){
         return{
             ...state,
+            isLoading:false,
             videoGamesDetail:action.payload
         }
     }
@@ -70,7 +70,7 @@ function rootReducer(state = initialState, action) {
     if(action.type === "LOADING"){
         return {
             ...state,
-            isLoading: !state.isLoading
+            isLoading: true
         }
     }
     if (action.type === "GET_VIDEOGAME_DETAIL") {

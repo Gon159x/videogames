@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useParams } from "react-router";
 import { buscarVideoJuego } from '../actions';
 import { connect } from 'react-redux';
+import Loader from './Loader';
 
 
 function VideoJuego({videoGame,buscarVideoJuego,reiniciar}) {
@@ -35,14 +36,14 @@ function VideoJuego({videoGame,buscarVideoJuego,reiniciar}) {
             plataformas = plataformas.map(elemento => elemento + ", ")
             plataformas = eliminarComa(plataformas)
         }
-        if(videoGame.genres){
+        if(videoGame.genres && videoGame.genres.length > 0){
             generos = videoGame.genres.map(elemento => elemento.name)
             generos = generos.map(elemento => elemento + ", ")
             generos = eliminarComa(generos)
         }
         
         return (
-            <body className='body-especial'>
+            <div className='body-especial'>
             <div className='pagina'>
                 <div className='contenedor'>
                     <h1>{videoGame.name}</h1>
@@ -59,16 +60,17 @@ function VideoJuego({videoGame,buscarVideoJuego,reiniciar}) {
                 </div>
                 
             </div>
-            </body>
+            </div>
 
 
         
         )}
     else {
         return(
-            <div className='probando'>
-                estoy por acasjdlajdiwajdlsia
+            <div className='cargando'>
+                <Loader/>
             </div>
+            
         )}
   };
 

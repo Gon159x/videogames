@@ -8,7 +8,7 @@ import {getGeneros, getVideoGames} from "./actions";
 import loadingImage from "./55a4629ffc77f363e3ec1534b8a422-unscreen.gif";
 import PagVideoJuego from './components/PagVideoJuego';
 import FormVideoJuego from './components/FormVideoJuego';
-
+import Loader from './components/Loader';
 
 
 function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) {
@@ -35,9 +35,8 @@ function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) 
 
   useEffect(() =>{
 
-    console.log(generos.length)
+
     if(generos.length === 0){
-      console.log("Entre al fetch")
       fetch("https://api.rawg.io/api/genres?key=f79ce3822058497090acd470ecd98a01")
       .then(data => data.json())
       .then(data => data.results.map(elemento => elemento))
@@ -53,7 +52,6 @@ function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) 
   },[])
 
   useEffect(() => {
-    console.log(videoGames)
     const videoJuegosNuevos = []
     let key = 0
     let limite_superior = pagina*15 > videoGames.length ? videoGames.length : pagina*15
@@ -107,7 +105,10 @@ function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) 
             <Nav reiniciar= {reiniciar}/>
 
             {/* <button onClick={getVideoGames()}>boton...</button> */}
-            {isLoading ? <div className='cargando'><img src={loadingImage}/></div>:<>
+            {/* <div className='cargando'><img src={loadingImage}/></div> */}
+            {isLoading ? 
+            <div className='cargando'><Loader/></div>
+            :<>
             <VideoJuegos videoJuegos={videoJuegos}/>
             <div className='paginado'>
               <button onClick={() => { 

@@ -21,15 +21,21 @@ export function buscarVideoJuego(id){
         console.log(json)
         dispatch({type:"BUSCAR",payload:json})})
     else {
-      console.log("Entre al else")
       const nuevoId = id.slice(2,id.length)
       return fetch('http://localhost:3001/videogames/'+nuevoId)
       .then(data => data.json())
       .then(json => {
-        console.log("json--------------------",json[0])
-        json = {description_raw:json[0].descripcion,name:json[0].nombre,background_image
-          :"https://i.pinimg.com/originals/48/37/c8/4837c8aeb859b31d514b561bd4f4cb65.jpg",rating:json[0].rating,released:json[0].lanzamiento}
-        console.log("nnuevo json",json)
+        if(json[0].Generos)
+          json[0].Generos = json[0].Generos.map(e => {return {id:e.id,name:e.nombre}})
+        else
+          json[0].Generos = [{id:99999,name:"Sin generos archivados"}]
+        if(json[0].plataformas){
+          const plataformas =  json[0].plataformas.split(",")
+          json[0].plataformas = plataformas.map(e => {return {platform:{name:e}}})
+        }
+        console.log(json[0])
+        json = {parent_platforms:json[0].plataformas,description_raw:json[0].descripcion,name:json[0].nombre,background_image
+          :"https://areajugones.sport.es/wp-content/uploads/2022/08/guilty-gear-strive.jpg",rating:json[0].rating,released:json[0].lanzamiento,genres:json[0].Generos}
         dispatch({type:"BUSCAR",payload:json})})
     }
   }
@@ -63,9 +69,14 @@ export function buscarVideoJuego(id){
             for (let index = 0; index < respuestas.length; index++) {
               const element = respuestas[index];
               const datos = await element.json()
-              if(!datos.results)
-                datos.results = datos.map(e => {return{id:e.id,name:e.nombre,baseDatos:true,background_image
-                  :"https://i.pinimg.com/originals/48/37/c8/4837c8aeb859b31d514b561bd4f4cb65.jpg"}})
+              if(!datos.results){
+                datos.forEach(e=> {
+                  if(e.Generos)
+                    e.Generos = e.Generos.map(a => {return{id:a.id,name:a.nombre}})
+                })
+                datos.results = datos.map(e => {return{genres:e.Generos,id:e.id,name:e.nombre,baseDatos:true,background_image
+                  :"https://areajugones.sport.es/wp-content/uploads/2022/08/guilty-gear-strive.jpg"}})
+                }
               datos.results.forEach(element => {
                 paginas.push(element)
               });
@@ -97,12 +108,15 @@ export function buscarVideoJuego(id){
             let paginas = []
             for (let index = 0; index < respuestas.length; index++) {
               const element = respuestas[index];
-              const datos = await element.json()
+              let datos = await element.json()
               if(!datos.results){
-                datos.results = datos.map(e => {return{id:e.id,name:e.nombre,baseDatos:true,background_image
-                  :"https://i.pinimg.com/originals/48/37/c8/4837c8aeb859b31d514b561bd4f4cb65.jpg"}})
-                
-              }
+                datos.forEach(e=> {
+                  if(e.Generos)
+                    e.Generos = e.Generos.map(a => {return{id:a.id,name:a.nombre}})
+                })
+                datos.results = datos.map(e => {return{genres:e.Generos,id:e.id,name:e.nombre,baseDatos:true,background_image
+                  :"https://areajugones.sport.es/wp-content/uploads/2022/08/guilty-gear-strive.jpg"}})
+                }
               datos.results.forEach(element => {
                 paginas.push(element)
               });

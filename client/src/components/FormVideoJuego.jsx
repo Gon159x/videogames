@@ -109,7 +109,6 @@ function  Form({generos,getVideoGames}) {
       }
       const handleSubmit = (event) => {
         input.plataformas = input.plataformas.join(",")
-        console.log(input)
         postearJuego(input)
         event.preventDefault()
       }
