@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {getVideoGames} from "../actions";
+import { baseURL } from '..';
 
 function  Form({generos,getVideoGames}) {
 
@@ -96,7 +97,7 @@ function  Form({generos,getVideoGames}) {
 
 
       async function postearJuego(data){
-        const respuesta = await fetch("http://localhost:3001/videogames",{
+        const respuesta = await fetch(baseURL+"/videogames",{
           method:'POST',
           headers: {
             'Content-Type': 'application/json'
