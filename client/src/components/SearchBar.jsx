@@ -4,13 +4,16 @@ import { Link } from 'react-router-dom';
 import './SearchBar.css';
 import { getVideoGame } from "../actions";
 
-function SearchBar({videoGames,getVideoGame}) {
+function SearchBar({getVideoGame,simplificado}) {
 
   const [videoJuego, setvideoJuego] = useState('')
 
   const cambia = (e) => {
     setvideoJuego(e.target.value)
   }
+  let clasSimplificado ="chico"
+  if(simplificado)
+    clasSimplificado = "grande"
 
   return (
     <form className="form-inline"  onSubmit={(e) => {
@@ -20,7 +23,7 @@ function SearchBar({videoGames,getVideoGame}) {
       //onSearch(videoJuego);
     }}>
       <div>
-      <input className="buscador" type="search" placeholder="   Buscar Videojuego...." onChange={cambia}/>
+      <input className={clasSimplificado} type="search" placeholder="   Buscar Videojuego...." onChange={cambia}/>
       {/* <button type="submit">Buscar</button> */}
       </div>
       

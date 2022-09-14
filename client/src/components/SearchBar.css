@@ -1,4 +1,4 @@
-.buscador{
+.chico{
     width: 22vw;
     height: 5vh;
     border-radius: 100px;
@@ -9,3 +9,28 @@
     font-weight: bolder;
 }
 
+.grande{
+    width: 50vw;
+    height: 5vh;
+    border-radius: 100px;
+    background-color: rgb(83, 83, 83);
+    color: aliceblue;
+    padding-left: 7%;
+    font-size:medium;
+    font-weight: bolder;
+}
+
+
+
+@media all and (max-width: 480px) {
+    .chico{
+        width: 80vw;
+        height: 5vh;
+        border-radius: 100px;
+        background-color: rgb(83, 83, 83);
+        color: aliceblue;
+        padding-left: 7%;
+        font-size:medium;
+        font-weight: bolder;
+    }
+}

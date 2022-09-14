@@ -71,7 +71,7 @@ export function buscarVideoJuego(id){
             for (let index = 0; index < respuestas.length; index++) {
               const element = respuestas[index];
               const datos = await element.json()
-              if(!datos.results){
+              if(datos.length > 0 && !datos.results){
                 datos.forEach(e=> {
                   if(e.Generos)
                     e.Generos = e.Generos.map(a => {return{id:a.id,name:a.nombre}})
@@ -79,6 +79,7 @@ export function buscarVideoJuego(id){
                 datos.results = datos.map(e => {return{genres:e.Generos,id:e.id,name:e.nombre,baseDatos:true,background_image
                   :"https://areajugones.sport.es/wp-content/uploads/2022/08/guilty-gear-strive.jpg"}})
                 }
+              if(datos.results)
               datos.results.forEach(element => {
                 paginas.push(element)
               });
@@ -88,6 +89,7 @@ export function buscarVideoJuego(id){
         .then(json => {
             dispatch({type:"GET_VIDEOGAMES_BYNAME",payload:json})
         })
+        .catch(error => console.log(error.message))
     }
   }
 

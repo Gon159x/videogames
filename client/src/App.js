@@ -31,7 +31,6 @@ function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) 
 
   const reiniciar = function(){
     setPagina(1)
-    //getVideoGames()
   }
 
   useEffect(() =>{
@@ -79,15 +78,8 @@ function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) 
 
   const kingdom = [{titulo:"Kingdom Come deliverance",generos:["Drama","Accion"],img : "https://cdn1.epicgames.com/ca4058f18b0a4a9e9e2ccc28f7f33000/offer/EGS_WarhorseStudios_KingdomComeDeliverance_S3-1360x766-1e8502930c6282cb34acf7add01c6832a5bc217e.jpg"}]
   
-  //videoJuegos.push(guiltyGear)
-  //videoJuegos.push(guiltyGear)
-  //videoJuegos.push(guiltyGear)
-  //videoJuegos.push(guiltyGear)
-  //videoJuegos.push(guiltyGear)
-  //Deberia controlar que solo le envie 15, le envio los primeros 15, cuando se hace click en siguiente, le envio otros 15 y asi
   return (
     <div className="home">
-      {/* <VideoJuego></VideoJuego> */}
       <Switch>
         <Route
           exact path = "/landing"
@@ -103,10 +95,7 @@ function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) 
           <Route
             exact path = "/home"
           >
-            <Nav reiniciar= {reiniciar}/>
-
-            {/* <button onClick={getVideoGames()}>boton...</button> */}
-            {/* <div className='cargando'><img src={loadingImage}/></div> */}
+            <Nav reiniciar={reiniciar} simplificado={false}/>
             {isLoading ? 
             <div className='cargando'><Loader/></div>
             :<>
@@ -127,20 +116,20 @@ function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) 
           <Route
             path="/home/videogame/:id"
           >
-            <Nav reiniciar= {reiniciar}/>
-            {/* hacer otro nav sin los filtros */}
+            <Nav reiniciar= {reiniciar} simplificado={true}/>
             <PagVideoJuego reiniciar = {reiniciar} titulo="kingdom"/>
           </Route>
           <Route
             path = "/crearvideojuego"
           >
-            <Nav reiniciar= {reiniciar}/>
+            <Nav reiniciar= {reiniciar} simplificado={true}/>
             <FormVideoJuego/>
           </Route>
-          <Nav reiniciar={reiniciar}/>
+      
           <Route
             path = "/agregado"
           >
+            
             <h1>Juego agregado</h1>
           </Route>
       </Switch>

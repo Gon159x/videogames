@@ -1,119 +1,84 @@
-/* From uiverse.io by @bhaveshxrawat */
-.card {
-    /* width: 190px;
-    height: 254px; */
-    width: 21vw;
-    height: 27vh;
-    background: #07182E;
-    position: relative;
-    display: flex;
-    place-content: center;
-    place-items: center;
-    overflow: hidden;
-    border-radius: 20px;
-  }
-  
-  .card h2 {
-    z-index: 1;
-    color: white;
-    font-size: 2em;
-  }
-  
-  .card::before {
-    content: '';
-    position: absolute;
-    width: 100px;
-    background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
-    height: 130%;
-    animation: rotBGimg 3s linear infinite;
-    transition: all 0.2s linear;
-  }
-  
-  @keyframes rotBGimg {
-    from {
-      transform: rotate(0deg);
-    }
-  
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-  .card::after {
-    content: '';
-    position: absolute;
-    background: #07182E;
-    ;
-    inset: 5px;
-    border-radius: 15px;
-  }  
-  /* .card:hover:before {
-    background-image: linear-gradient(180deg, rgb(81, 255, 0), purple);
-    animation: rotBGimg 3.5s linear infinite;
-  } */
-  
 
 
 .videoJuego-base{
+  width: 21vw;
+  height: 27vw;
+  background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+  border-radius: 15px;
+  transition: all .3s;
+  }
+
+.videoJuego{
+  width: 21vw;
+  height: 27vw;
+  /* width: 23%;
+  height: 43%; */
+  
+  /* padding: 3%; */
+  /* border: 6px solid #333; */
+  /* background-color: #333; */
+  background-color: #252525;
+  /* border-radius: 15px; */
+  border-radius: 15px;
+  transition: all .2s;
+  color: aliceblue;
+  /* box-shadow: 6px 5px 5px black; */
+}
+
+.videoJuego-base:hover{
+  box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);
+}
+
+.videoJuego:hover{
+  transform: scale(0.98);
+  border-radius: 15px;
+}
+
+.imagen{
+  /* width: 20vw;
+  height: 20vh; */
+  width: 100%;
+  height: 50%;
+  border-radius: 5%;
+}
+
+.generos{
+  display: flex;
+  flex:1;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: auto;
+  height: auto;
+  justify-content: center;
+  padding-left: 9%;
+  padding-right: 9%;
+}
+.texto-generos{
+  width: auto;
+  height: auto;
+  padding-right: 15%;
+  padding-left: 5%;
+}
+
+.link{
+  text-decoration:none;
+}
+
+
+@media all and (max-width: 480px) {
+  .videoJuego{
+    width: 80vw;
+    height: 48vh;
+    background-color: #252525;
+    border-radius: 15px;
+    transition: all .2s;
+    color: #ffffff;;
+  }
+  .videoJuego-base{
     width: 21vw;
     height: 27vw;
     background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
     border-radius: 15px;
     transition: all .3s;
    }
-
-.videoJuego{
-    width: 21vw;
-    height: 27vw;
-    /* width: 23%;
-    height: 43%; */
-    
-    /* padding: 3%; */
-    /* border: 6px solid #333; */
-    /* background-color: #333; */
-    background-color: #252525;
-    /* border-radius: 15px; */
-    border-radius: 15px;
-    transition: all .2s;
-    color: aliceblue;
-    /* box-shadow: 6px 5px 5px black; */
-}
-
-.videoJuego-base:hover{
-    box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);
-}
-
-.videoJuego:hover{
-    transform: scale(0.98);
-    border-radius: 15px;
-}
-
-.imagen{
-    /* width: 20vw;
-    height: 20vh; */
-    width: 100%;
-    height: 50%;
-    border-radius: 5%;
-}
-
-.generos{
-    display: flex;
-    flex:1;
-    flex-wrap: wrap;
-    flex-direction: row;
-    width: auto;
-    height: auto;
-    justify-content: center;
-    padding-left: 9%;
-    padding-right: 9%;
-}
-.texto-generos{
-    width: auto;
-    height: auto;
-    padding-right: 15%;
-    padding-left: 5%;
-}
-
-.link{
-    text-decoration:none;
 }
