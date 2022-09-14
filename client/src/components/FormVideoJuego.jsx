@@ -6,34 +6,54 @@ import { Link } from 'react-router-dom';
 import {getVideoGames} from "../actions";
 import { baseURL } from '..';
 
+
+
+const validate = function(input){
+  let errors = {};
+  if(!input.nombre){
+      errors.nombre = 'El nombre de juego es obligatorio';
+  }else if (["%","#","@","&","$"].some(elemento => input.nombre.includes(elemento))){
+      errors.nombre = 'Nombre de juego invalido';
+  }
+  if(!input.descripcion){
+      errors.descripcion = 'La descripcion es obligatoria';
+  }
+  if(input.lanzamiento && !validarFecha(input.lanzamiento)){
+      errors.lanzamiento = 'La fecha de lanzamiento no puede superar la actual'
+  }
+  if(input.rating && input.rating > 5 || input.rating < 1){
+      errors.rating = 'El rating va desde 1 hasta 5 puntos'
+  }
+  if(input.generos.length < 1){
+      errors.generos = 'Se debe seleccionar al menos un genero'
+  }
+  if(input.plataformas.length < 1){
+      errors.plataformas = 'Se debe seleccionar al menos una plataforma'
+  }
+  return errors
+}
+
+
+
+const validarFecha = function(value){
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+
+  today = yyyy + '-' + mm + '-' + dd;
+
+  return(today >= value)
+}
+
+export {validate,validarFecha}
+
 function  Form({generos,getVideoGames}) {
 
 
+    
 
-    const validate = function(input){
-        let errors = {};
-        if(!input.nombre){
-            errors.nombre = 'El nombre de juego es obligatorio';
-        }else if (["%","#","@","&","$"].some(elemento => input.nombre.includes(elemento))){
-            errors.nombre = 'Nombre de juego invalido';
-        }
-        if(!input.descripcion){
-            errors.descripcion = 'La descripcion es obligatoria';
-        }
-        if(input.lanzamiento && !validarFecha(input.lanzamiento)){
-            errors.lanzamiento = 'La fecha de lanzamiento no puede superar la actual'
-        }
-        if(input.rating && input.rating > 5 || input.rating < 1){
-            errors.rating = 'El rating va desde 1 hasta 5 puntos'
-        }
-        if(input.generos.length < 1){
-            errors.generos = 'Se debe seleccionar al menos un genero'
-        }
-        if(input.plataformas.length < 1){
-            errors.plataformas = 'Se debe seleccionar al menos una plataforma'
-        }
-        return errors
-      }
+    
       
     
     
@@ -49,16 +69,7 @@ function  Form({generos,getVideoGames}) {
       const [agregado,setAgregado] = React.useState(false)
 
 
-      const validarFecha = function(value){
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-
-        today = yyyy + '-' + mm + '-' + dd;
-
-        return(today >= value)
-      }
+      
 
       const handleInputChange = function(e) {
         if(e.target.type === "checkbox"){
