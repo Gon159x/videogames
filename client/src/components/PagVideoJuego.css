@@ -66,4 +66,19 @@
         padding-top: 3%;
         padding-right: auto;
     }
+    .pagina{
+        overflow: hidden;
+        height: auto; 
+        width:  100vw; /* For 100% screen width */
+        /* width: 23%;
+        height: 43%; */
+        
+        border: 6px solid #333;
+        background-color: #333;
+        border-radius: 15px;
+        color: aliceblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
