@@ -10,7 +10,7 @@ router.get('/',async function(req,res){
         //const creacionBase = await Videojuego.create({nombre:"Kingdom come",descripcion:"Esta weno",plataformas:"Nintendo"})
         let name = req.query.name
         let videoJuegos = await Videojuego.findAll({include: Genero})
-        console.log(videoJuegos.map(e => e.toJSON()))
+
         // const completos = []
         // videoJuegos.forEach(async element => {
         //     // const generos = await element.getGeneros()
