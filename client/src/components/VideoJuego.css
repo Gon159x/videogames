@@ -75,8 +75,8 @@
     color: #ffffff;;
   }
   .videoJuego-base{
-    width: 21vw;
-    height: 27vw;
+    width: 80vw;
+    height: 48vh;
     background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
     border-radius: 15px;
     transition: all .3s;
