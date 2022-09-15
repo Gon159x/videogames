@@ -34,21 +34,7 @@ function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) 
   }
 
   useEffect(() =>{
-
-
-    if(generos.length === 0){
-      fetch("https://api.rawg.io/api/genres?key=f79ce3822058497090acd470ecd98a01")
-      .then(data => data.json())
-      .then(data => data.results.map(elemento => elemento))
-      .then(data => data.forEach(elemento => {
-        postearGenero({id:elemento.id,nombre:elemento.name})
-        }
-      ))}
-
-    
-
     getVideoGames()
-    getGeneros()
   },[])
 
   useEffect(() => {
@@ -76,7 +62,7 @@ function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) 
 
 
 
-  const kingdom = [{titulo:"Kingdom Come deliverance",generos:["Drama","Accion"],img : "https://cdn1.epicgames.com/ca4058f18b0a4a9e9e2ccc28f7f33000/offer/EGS_WarhorseStudios_KingdomComeDeliverance_S3-1360x766-1e8502930c6282cb34acf7add01c6832a5bc217e.jpg"}]
+  //const kingdom = [{titulo:"Kingdom Come deliverance",generos:["Drama","Accion"],img : "https://cdn1.epicgames.com/ca4058f18b0a4a9e9e2ccc28f7f33000/offer/EGS_WarhorseStudios_KingdomComeDeliverance_S3-1360x766-1e8502930c6282cb34acf7add01c6832a5bc217e.jpg"}]
   
   return (
     <div className="home">

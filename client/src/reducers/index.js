@@ -4,7 +4,8 @@ const initialState = {
     videoGamesDetail: {},
     isLoading: false,
     ordenando: false,
-    filtrados: []//Implementar esto para no tener q buscar siempre en videoGames
+    filtrados: [],//Implementar esto para no tener q buscar siempre en videoGames,
+    generosLoading:false,
 }
 
 
@@ -41,9 +42,11 @@ function rootReducer(state = initialState, action) {
         }
     }
     if(action.type === "AGREGAR_GENEROS"){
+        console.log("payload: ------------------->",action.payload)
         return {
             ...state,
             generos:action.payload,
+            generosLoading:false
         }
     }
     if(action.type === "BUSCAR"){
@@ -71,6 +74,12 @@ function rootReducer(state = initialState, action) {
         return {
             ...state,
             isLoading: true
+        }
+    }
+    if(action.type === "LOADING_G"){
+        return {
+            ...state,
+            generosLoading: true
         }
     }
     if (action.type === "GET_VIDEOGAME_DETAIL") {

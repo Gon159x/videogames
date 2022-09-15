@@ -6,11 +6,26 @@ import { connect } from 'react-redux';
 import { ordenar,filtrarGenero,filtrarBD } from '../actions/index.js';
 import {useEffect} from 'react';
 import logo from "./favicon.ico"
-import Loader from './Loader.jsx';
+import LoaderGen from './LoaderGen.jsx';
+import { baseURL } from '../index.js';
+import { getGeneros } from '../actions/index.js';
+import { useState } from 'react';
 
-function Nav({filtrarBD,ordenar,reiniciar,generos,filtrarGenero,simplificado}) {
+function Nav({getGeneros,filtrarBD,ordenar,reiniciar,generos,filtrarGenero,simplificado,isLoading}) {
+
+  const [render,setRender] = useState(false)
+
+  
+
     useEffect(() =>{
-    },[generos])
+      getGeneros()
+    },[])
+
+    useEffect(()=>{
+      console.log("generos----------->",generos)
+      console.log("loading---------->",isLoading)
+    },[generos,isLoading])
+    
     let claseHome = ""
     let claseSearch = ""
     if(simplificado){
@@ -42,7 +57,7 @@ function Nav({filtrarBD,ordenar,reiniciar,generos,filtrarGenero,simplificado}) {
               </li>
             <li key={8}><a href="#">Generos<i className="down"></i></a>
                   <ul>
-                  {generos ? generos.map((elemento,indice) => <li key={15+indice} onClick={() => filtrarGenero(elemento.nombre)}><a href="#">{elemento.nombre}</a></li>) : <li key={9}><Loader/></li>}
+                  {(generos && generos.length > 0) ? generos.map((elemento,indice) => <li key={15+indice} onClick={() => filtrarGenero(elemento.nombre)}><a href="#">{elemento.nombre}</a></li>) : <li key={9}><LoaderGen/></li>}
                   </ul>
             </li>
             <li key={10}><a href="#">Base de datos<i className="down"></i></a>
@@ -70,7 +85,8 @@ function Nav({filtrarBD,ordenar,reiniciar,generos,filtrarGenero,simplificado}) {
   
   function mapStateToProps(state) {
     return {
-      generos: state.generos
+      generos: state.generos,
+      isLoading: state.generosLoading
     };
   }//Creo que esto no hace falta
   
@@ -78,7 +94,8 @@ function Nav({filtrarBD,ordenar,reiniciar,generos,filtrarGenero,simplificado}) {
     return {
       ordenar: tipo => dispatch(ordenar(tipo)),
       filtrarGenero: genero => dispatch(filtrarGenero(genero)),
-      filtrarBD: tipo => dispatch(filtrarBD(tipo))
+      filtrarBD: tipo => dispatch(filtrarBD(tipo)),
+      getGeneros: () => dispatch(getGeneros())
     };
   }
   

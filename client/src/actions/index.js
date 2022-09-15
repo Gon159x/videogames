@@ -15,6 +15,7 @@ export function filtrarBD(payload){
 
 export function buscarVideoJuego(id){
   return function(dispatch){
+    dispatch({ type: 'LOADING' });
     if(!id.includes("bd"))
     //dispatch({ type: 'LOADING' });
       return fetch(`https://api.rawg.io/api/games/${id}?key=f79ce3822058497090acd470ecd98a01`)
@@ -42,11 +43,42 @@ export function buscarVideoJuego(id){
     }
   }
 }
+
+
+async function postearGenero(data){
+  const respuesta = await fetch(baseURL+"/genres",{
+  method:'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+  })
+  }
+
+  function obtenerGeneros(generos){
+    if(generos.length === 0){
+      return fetch("https://api.rawg.io/api/genres?key=f79ce3822058497090acd470ecd98a01")
+      .then(data => data.json())
+      .then(data => data.results.map(elemento => elemento))
+      .then(data => data.forEach(elemento => {
+        postearGenero({id:elemento.id,nombre:elemento.name})
+        }))
+      .then(data => fetch(baseURL+"/genres"))
+      .then(data => data.json())
+      }
+      else 
+        return generos
+  }
+
   export function getGeneros(){
     return function(dispatch){
+      dispatch({ type: 'LOADING_G' });
       return fetch(baseURL+"/genres")
       .then(data =>  data.json())
+      .then(data => obtenerGeneros(data))
       .then(data => dispatch({type:"AGREGAR_GENEROS",payload:data}))
+      .then(data => console.log("data------------------>",data))
+      
     }
   }
 
