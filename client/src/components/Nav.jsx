@@ -7,7 +7,6 @@ import { ordenar,filtrarGenero,filtrarBD } from '../actions/index.js';
 import {useEffect} from 'react';
 import logo from "./favicon.ico"
 import LoaderGen from './LoaderGen.jsx';
-import { baseURL } from '../index.js';
 import { getGeneros } from '../actions/index.js';
 import { useState } from 'react';
 

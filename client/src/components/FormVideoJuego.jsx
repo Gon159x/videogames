@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {getVideoGames} from "../actions";
-import { baseURL } from '..';
+
+const baseURL = "http://localhost:3001"
 
 
 

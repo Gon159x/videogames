@@ -9,7 +9,9 @@ import loadingImage from "./55a4629ffc77f363e3ec1534b8a422-unscreen.gif";
 import PagVideoJuego from './components/PagVideoJuego';
 import FormVideoJuego from './components/FormVideoJuego';
 import Loader from './components/Loader';
-import {baseURL} from './index.js'
+
+
+const baseURL = "http://localhost:3001"
 
 
 function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) {
@@ -70,7 +72,7 @@ function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) 
         <Route
           exact path = "/landing"
           >  
-            <div className = "landing">
+            <div className = "landing" >
             <Link style={{textDecoration: 'none'}} to = "/home">
               <button className="boton-landing">Entrar a la pagina</button>
             </Link>

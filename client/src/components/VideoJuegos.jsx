@@ -6,9 +6,9 @@ import VideoJuego from './VideoJuego.jsx';
 export default function VideoJuegos({videoJuegos}) {
     if(videoJuegos.length > 0)
         return (
-            <div className='videoJuegos'>
+            <div className='videoJuegos' data-testid="videojuegos">
             {videoJuegos.map(v =>
-            <div className='espacio' key = {v.key}>
+            <div className='espacio' data-testid={"test"+v.key} key = {v.key}>
                 <VideoJuego
                 id = {v.key}
                 bd = {v.baseDatos}
@@ -21,6 +21,6 @@ export default function VideoJuegos({videoJuegos}) {
         );
     else{
         return(
-            <div>No hay videojuegos para cargar</div>
+            <div data-testid="videojuegos-0">No hay videojuegos para cargar</div>
         )}
 }

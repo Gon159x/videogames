@@ -1,4 +1,6 @@
-import { baseURL } from "..";
+//import { baseURL } from "..";
+
+const baseURL = "http://localhost:3001"
 
 export function getVideoGameDetail(payload) {
     return { type: "GET_VIDEOGAME_DETAIL", payload };
