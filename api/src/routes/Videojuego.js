@@ -2,7 +2,21 @@ const { Router } = require('express');
 const { Videojuego, Genero, videojuego_genero} = require('../db.js');
 const router = Router();
 
-
+router.delete("/deletegame",async function(req,res){
+    console.log("Entre...")
+    try{
+        let id = req.body.id
+        let destruido = await Videojuego.destroy({
+            where:{
+                id:id
+            }
+        })
+        console.log("Destruido--------->",destruido)
+        res.sendStatus(200).send(destruido)
+    }catch(error){
+        res.sendStatus(408).send("No existe o no se pudo eliminar")
+    }
+})
 
 
 router.get('/',async function(req,res){

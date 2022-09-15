@@ -75,7 +75,8 @@ nav ul ul {
 	
 /* Display Dropdowns on Hover */
 nav ul li:hover > ul {
-	display:inherit;
+	display:flex;
+	flex-direction: column;
 }
 	
 /* Fisrt Tier Dropdown */

@@ -2,9 +2,6 @@ import { render, screen, cleanup } from '@testing-library/react';
 
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-// import { Provider } from "react-redux";
-// import store from "./store/index.js";
-// import { BrowserRouter } from 'react-router-dom';
 import VideoJuegos from './components/VideoJuegos.jsx';
 
 
