@@ -5,8 +5,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {getVideoGames} from "../actions";
 
-// const baseURL = "http://localhost:3001"
-const baseURL= "https://videogames-bd.herokuapp.com"
+const baseURL = "http://localhost:3001"
+//const baseURL= "https://videogames-bd.herokuapp.com"
 
 
 
