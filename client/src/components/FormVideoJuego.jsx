@@ -5,8 +5,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {getVideoGames} from "../actions";
 
-const baseURL = "http://localhost:3001"
-//const baseURL= "https://videogames-bd.herokuapp.com"
+//const baseURL = "http://localhost:3001"
+const baseURL= "https://videogames-bd.herokuapp.com"
 
 
 
@@ -136,7 +136,7 @@ function  Form({generos,getVideoGames}) {
             <div className='contenedor-form'>
                 <ul className='ul-form'>
                     <li className='item'>
-                        <label>Nombre:&nbsp;&nbsp;&nbsp;</label>
+                        <label>Nombre del videojuego:&nbsp;&nbsp;&nbsp;</label>
                         <input type="text" name="nombre" value={input.nombre} onChange={handleInputChange}/>
                         {errors.nombre && (
                             <label className='danger'>&nbsp;{errors.nombre}</label>
@@ -145,13 +145,13 @@ function  Form({generos,getVideoGames}) {
                     <li className='item-descripcion'>
                         <label >Descripcion:&nbsp;&nbsp;&nbsp;</label>
                         {/* <input type="textarea" name="nombre" size="50"/> */}
-                        <textarea placeholder='Una breve descripcion del juego' name="descripcion" value={input.descripcion} onChange={handleInputChange}></textarea>
+                        <textarea className='text-area' placeholder='Una breve descripcion del juego' name="descripcion" value={input.descripcion} onChange={handleInputChange}></textarea>
                         {errors.descripcion && (
                             <label className='danger'>&nbsp;{errors.descripcion}</label>
                          )}
                     </li>
                     <li className='item'>
-                        <label >Lanzamiento:&nbsp;&nbsp;&nbsp;</label>
+                        <label >Fecha de lanzamiento:&nbsp;&nbsp;&nbsp;</label>
                         <input type="date" name="lanzamiento" value={input.lanzamiento} onChange={handleInputChange} />
                         {errors.lanzamiento && (
                             <label className='danger'>&nbsp;{errors.lanzamiento}</label>
@@ -168,25 +168,25 @@ function  Form({generos,getVideoGames}) {
                     <li className='item'>
                         <div className='item-generos'>
                             <label >Generos:&nbsp;&nbsp;&nbsp;</label>
-                            {generos.map(elemento => {return <><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{elemento.nombre}</label><input type="checkbox" name="generos" value={elemento.nombre} onChange={handleInputChange}/></>})}
+                            {generos.map(elemento => {return <div className='chek'><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{elemento.nombre}</label><input type="checkbox" name="generos" value={elemento.nombre} onChange={handleInputChange}/></div>})}
                         {errors.generos && (
                             <label className='danger'>&nbsp;{errors.generos}</label>
                          ) }
                         </div>
                     </li>
                     <li className='item'>
-                        <label >Plataformas:&nbsp;&nbsp;&nbsp;</label>
-                        <label>&nbsp;&nbsp;PC</label>
+                        <label >Plataformas:&nbsp;&nbsp;</label>
+                        <label>PC</label>
                         <input type="checkbox" name="plataformas" value="PC" onChange={handleInputChange}/>
-                        <label>&nbsp;Playstation</label>
+                        <label>&nbsp;&nbsp;Playstation</label>
                         <input type="checkbox" name="plataformas" value="Playstation" onChange={handleInputChange}/>
-                        <label>&nbsp;Xbox</label>
+                        <label>&nbsp;&nbsp;Xbox</label>
                         <input type="checkbox" name="plataformas" value="Xbox" onChange={handleInputChange}/>
-                        <label>&nbsp;Nintendo</label>
+                        <label>&nbsp;&nbsp;Nintendo</label>
                         <input type="checkbox" name="plataformas" value="Nintendo" onChange={handleInputChange}/>
-                        <label>&nbsp;Android</label>
+                        <label>&nbsp;&nbsp;Android</label>
                         <input type="checkbox" name="plataformas" value="Android" onChange={handleInputChange}/>
-                        <label>&nbsp;ios</label>
+                        <label>&nbsp;&nbsp;ios</label>
                         <input type="checkbox" name="plataformas" value="ios" onChange={handleInputChange}/>
                         {errors.plataformas && (
                             <label className='danger'>&nbsp;{errors.plataformas}</label>

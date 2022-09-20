@@ -11,8 +11,8 @@ import FormVideoJuego from './components/FormVideoJuego';
 import Loader from './components/Loader';
 
 
- const baseURL = "http://localhost:3001"
-//const baseURL= "https://videogames-bd.herokuapp.com"
+ //const baseURL = "http://localhost:3001"
+const baseURL= "https://videogames-bd.herokuapp.com"
 
 
 function App({generos,getGeneros,ordenando,videoGames,getVideoGames,isLoading}) {

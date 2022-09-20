@@ -1,7 +1,7 @@
 //import { baseURL } from "..";
 
- const baseURL = "http://localhost:3001"
-//const baseURL= "https://videogames-bd.herokuapp.com"
+// const baseURL = "http://localhost:3001"
+const baseURL= "https://videogames-bd.herokuapp.com"
 
 export function getVideoGameDetail(payload) {
     return { type: "GET_VIDEOGAME_DETAIL", payload };

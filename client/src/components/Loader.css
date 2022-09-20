@@ -73,3 +73,8 @@
       transform: rotate(1turn);
     }
   }
+
+  .text-area{
+    width: 45vw;
+    height: 18vh;
+  }
